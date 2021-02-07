@@ -1,5 +1,5 @@
 # Goth Life
-An broody mod for Ellpeck's game Tiny Life.
+A broody mod for Ellpeck's game Tiny Life.
 
 # Installing mods
 Installing a mod is pretty simple:
