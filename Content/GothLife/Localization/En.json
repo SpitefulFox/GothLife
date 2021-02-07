@@ -1,0 +1,38 @@
+{
+    "BuildMode": {
+        "GothLife.Candle": "Candle"
+    },
+    "Clothes": {
+        //"ExampleMod.DarkShirt": "Dark Shirt"
+    },
+    "Food": {
+        "GothLife.PBJ": "Peanut Butter and Blackcurrant Jelly Sandwich",
+        "GothLife.BlackRice": "Black Rice"
+    },
+    "Jobs": {
+        "GothLife.Gravekeeper": "Gravekeeper",
+        "GothLife.Gravekeeper0": "Shovel Carrier",
+        "GothLife.Gravekeeper1": "Grave Digger",
+        "GothLife.Gravekeeper2": "Gravestone Scrubber",
+        "GothLife.Gravekeeper3": "Crypt Cleaner",
+        "GothLife.Gravekeeper4": "Mausoleum Sweeper",
+        "GothLife.Gravekeeper5": "Sarcophagus Wiper",
+        "GothLife.Gravekeeper6": "Teen Scarer",
+        "GothLife.Gravekeeper7": "Hedge Trimmer",
+        "GothLife.Gravekeeper8": "Caretaker",
+        "GothLife.Gravekeeper9": "Psychopomp",
+        "GothLife.GravekeeperDescription": "A gravekeeper keeps the dead's final resting places nice and orderly.",
+        "GothLife.Mortician": "Mortician",
+        "GothLife.Mortician0": "Toenail Clipper",
+        "GothLife.Mortician1": "Corpse Cleaner",
+        "GothLife.Mortician2": "Organ Remover",
+        "GothLife.Mortician3": "Embalmer",
+        "GothLife.Mortician4": "Cremator",
+        "GothLife.Mortician5": "Tree Planter",
+        "GothLife.Mortician6": "Grief Listener",
+        "GothLife.Mortician7": "Coffin Preparer",
+        "GothLife.Mortician8": "Funeral Planner",
+        "GothLife.Mortician9": "Funeral Home Director",
+        "GothLife.MorticianDescription": "Even the dead need dressing up, and a mortician is just the one to do it."
+    }
+}

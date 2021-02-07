@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="TinyLifeApi" Version="0.6.0" />
+
+        <PackageReference Include="ExtremelySimpleLogger" Version="1.2.1" />
+        <PackageReference Include="MLEM.Data" Version="4.3.0-20" />
+        <PackageReference Include="MLEM.Extended" Version="4.3.0-20" />
+        <PackageReference Include="MLEM.Startup" Version="4.3.0-20" />
+        <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="./Content/**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Content\GothLife\GothLifeFurniture.atlas" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="Content\GothLife\CustomClothes.png" />
+      <Content Include="Content\GothLife\CustomFurniture.atlas" />
+      <Content Include="Content\GothLife\CustomFurniture.png" />
+      <Content Include="Content\GothLife\GothLifeFurniture.atlas" />
+      <Content Include="Content\GothLife\Localization\En.json" />
+    </ItemGroup>
+</Project>
