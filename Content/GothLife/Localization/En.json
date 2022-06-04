@@ -3,7 +3,7 @@
         "GothLife.Candle": "Candle"
     },
     "Clothes": {
-        //"ExampleMod.DarkShirt": "Dark Shirt"
+        "GothLife.SkullShirt": "Skull Shirt"
     },
     "Food": {
         "GothLife.PBJ": "PB & Blackcurrant Jelly Sandwich",

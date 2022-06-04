@@ -14,6 +14,7 @@ namespace GothLife
 
         //SpriteAnimation flame;
         private TimeSpan particleTime = TimeSpan.FromSeconds(3.0);
+        public override bool IsElectrical => false;
         
         public FurnitureCandle(Guid id, FurnitureType type, int[] colors, Map map, Vector2 pos) : base(id, type, colors, map, pos)
         {
@@ -44,7 +45,7 @@ namespace GothLife
         public override void Update(GameTime time, TimeSpan span, float speed)
         {
             particleTime += time.ElapsedGameTime * (double)speed;
-            if (particleTime.TotalSeconds >= 3.0)
+            if (!IsDisabled && particleTime.TotalSeconds >= 3.0)
             {
                 particleTime = TimeSpan.Zero;
 

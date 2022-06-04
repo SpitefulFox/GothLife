@@ -24,6 +24,7 @@ namespace GothLife {
         public override TextureRegion Icon => this.uiTextures[0, 0];
 
         private UniformTextureAtlas uiTextures;
+        private UniformTextureAtlas gothTops;
 
 
         //private UniformTextureAtlas customClothes;
@@ -34,7 +35,7 @@ namespace GothLife {
             darknessScheme = ColorScheme.Create(0x101010, 0x575757, 0x8a0900, 0x390075, 0x0f450a, 0xfffeed);
 
             // adding a custom furniture item
-            FurnitureType.Register(new FurnitureType.TypeSettings("GothLife.Candle", new Point(1, 1), ObjectCategory.SmallObject, 15, darknessScheme, ColorScheme.White)
+            FurnitureType.Register(new FurnitureType.TypeSettings("GothLife.Candle", new Point(1, 1), ObjectCategory.SmallObject | ObjectCategory.Lamp, 15, darknessScheme, ColorScheme.White)
             {
                 DecorativeRating = f => 1,
                 Icon = this.Icon,
@@ -42,12 +43,17 @@ namespace GothLife {
                 ConstructedType = typeof(FurnitureCandle)
             });
 
-            /*
+            
             // adding custom clothing
-            Clothes.Register(new Clothes("ExampleMod.DarkShirt", ClothesLayer.Shirt,
-                this.customClothes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                ColorScheme.WarmDark));
-            */
+            Clothes.Register(new Clothes("GothLife.SkullShirt", ClothesLayer.Shirt,
+                this.gothTops[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
+                100, // the price
+                ClothesIntention.Everyday | ClothesIntention.Workout | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer , // the clothes item's use cases
+                darknessScheme, ColorScheme.White)
+                { 
+                    Icon = this.Icon 
+                });
+            
             JobType.Register(new JobType("GothLife.Gravekeeper", 18f, new MonoGame.Extended.Range<int>(0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday));
             JobType.Register(new JobType("GothLife.Mortician", 25f, new MonoGame.Extended.Range<int>(10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday));
 
@@ -63,6 +69,7 @@ namespace GothLife {
             //texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 6));
 
             texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
+            texturePacker.Add(content.Load<Texture2D>("GothTops"), r => this.gothTops = new UniformTextureAtlas(r, 8, 8));
         }
 
         public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info)
