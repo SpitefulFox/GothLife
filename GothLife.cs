@@ -54,11 +54,11 @@ namespace GothLife {
                     Icon = this.Icon 
                 });
             
-            JobType.Register(new JobType("GothLife.Gravekeeper", 18f, new MonoGame.Extended.Range<int>(0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday));
-            JobType.Register(new JobType("GothLife.Mortician", 25f, new MonoGame.Extended.Range<int>(10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday));
+            JobType.Register(new JobType("GothLife.Gravekeeper", uiTextures[2, 0], 18f, new MonoGame.Extended.Range<int>(0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday));
+            JobType.Register(new JobType("GothLife.Mortician", uiTextures[3, 0], 25f, new MonoGame.Extended.Range<int>(10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday));
 
-            FoodType.Register(new FoodType("GothLife.PBJ", 0, 5, 80));
-            FoodType.Register(new FoodType("GothLife.BlackRice", 1, 7, 90));
+            FoodType.Register(new FoodType("GothLife.PBJ", 0, 5, 80, FoodType.FoodIntolerance.None));
+            FoodType.Register(new FoodType("GothLife.BlackRice", 1, 7, 90, FoodType.FoodIntolerance.None));
         }
 
         public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {

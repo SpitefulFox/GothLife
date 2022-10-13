@@ -14,7 +14,7 @@ namespace GothLife
 
         //SpriteAnimation flame;
         private TimeSpan particleTime = TimeSpan.FromSeconds(3.0);
-        public override bool IsElectrical => false;
+        //public override bool IsElectrical => false;
         
         public FurnitureCandle(Guid id, FurnitureType type, int[] colors, Map map, Vector2 pos) : base(id, type, colors, map, pos)
         {
