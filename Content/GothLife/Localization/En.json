@@ -3,7 +3,8 @@
         "GothLife.Candle": "Candle"
     },
     "Clothes": {
-        "GothLife.SkullShirt": "Skull Shirt"
+        "GothLife.SkullShirt": "Skull Shirt",
+        "GothLife.WitchHat": "Witch Hat"
     },
     "Food": {
         "GothLife.PBJ": "PB & Blackcurrant Jelly Sandwich",

@@ -11,6 +11,8 @@ using TinyLife.Objects;
 using TinyLife.Utilities;
 using TinyLife.Goals;
 using TinyLife.Skills;
+using TinyLife.Tools;
+using TinyLife.World;
 
 namespace GothLife {
     public class GothLife : Mod {
@@ -25,6 +27,7 @@ namespace GothLife {
 
         private UniformTextureAtlas uiTextures;
         private UniformTextureAtlas gothTops;
+        private UniformTextureAtlas gothHats;
 
 
         //private UniformTextureAtlas customClothes;
@@ -35,27 +38,51 @@ namespace GothLife {
             darknessScheme = ColorScheme.Create(0x101010, 0x575757, 0x8a0900, 0x390075, 0x0f450a, 0xfffeed);
 
             // adding a custom furniture item
-            FurnitureType.Register(new FurnitureType.TypeSettings("GothLife.Candle", new Point(1, 1), ObjectCategory.SmallObject | ObjectCategory.Lamp, 15, darknessScheme, ColorScheme.White)
+            FurnitureType.Register(new FurnitureType.TypeSettings("GothLife.Candle", new Point(1, 1), ObjectCategory.SmallObject | ObjectCategory.FireLight, 15, darknessScheme, ColorScheme.White)
             {
-                DecorativeRating = f => 1,
                 Icon = this.Icon,
-                Tab = TinyLife.Tools.FurnitureTool.Tab.Lighting,
-                ConstructedType = typeof(FurnitureCandle)
+                //ConstructedType = typeof(FurnitureCandle)
+
+                DecorativeRating = f => 1,
+                Tab = (FurnitureTool.Tab.Decoration | FurnitureTool.Tab.Lighting),
+                LightSettings =
+                {
+                    CreateLights = (LightFurniture f) => new Light[1]
+                    {
+                        new Light(f.Map, f.Position, Light.CircleTexture, new Vector2(4f, 5f), Color.Orange)
+                    },
+                    FireParticleOffsets = new System.Func<LightFurniture, Vector2>[1]
+                    {
+                        f => new Vector2(0.5f, -0.50f * (float)Tile.Height)
+
+                    },
+                    IsElectrical = false,
+                    Flickers = true
+                }
             });
 
             
             // adding custom clothing
             Clothes.Register(new Clothes("GothLife.SkullShirt", ClothesLayer.Shirt,
                 this.gothTops[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                100, // the price
+                100f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Workout | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer , // the clothes item's use cases
                 darknessScheme, ColorScheme.White)
                 { 
                     Icon = this.Icon 
                 });
-            
+
+            Clothes.Register(new Clothes("GothLife.WitchHat", ClothesLayer.HeadAccessories,
+                this.gothHats[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
+                100f, // the price
+                ClothesIntention.Everyday | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer | ClothesIntention.Winter, // the clothes item's use cases
+                darknessScheme, darknessScheme)
+            {
+                Icon = this.Icon
+            });
+
             JobType.Register(new JobType("GothLife.Gravekeeper", uiTextures[2, 0], 18f, new MonoGame.Extended.Range<int>(0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday));
-            JobType.Register(new JobType("GothLife.Mortician", uiTextures[3, 0], 25f, new MonoGame.Extended.Range<int>(10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday));
+            JobType.Register(new JobType("GothLife.Mortician", uiTextures[4, 0], 25f, new MonoGame.Extended.Range<int>(10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday));
 
             FoodType.Register(new FoodType("GothLife.PBJ", 0, 5, 80, FoodType.FoodIntolerance.None));
             FoodType.Register(new FoodType("GothLife.BlackRice", 1, 7, 90, FoodType.FoodIntolerance.None));
@@ -70,6 +97,7 @@ namespace GothLife {
 
             texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
             texturePacker.Add(content.Load<Texture2D>("GothTops"), r => this.gothTops = new UniformTextureAtlas(r, 8, 8));
+            texturePacker.Add(content.Load<Texture2D>("GothHats"), r => this.gothHats = new UniformTextureAtlas(r, 8, 6));
         }
 
         public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info)
