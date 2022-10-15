@@ -4,11 +4,15 @@
     },
     "Clothes": {
         "GothLife.SkullShirt": "Skull Shirt",
-        "GothLife.WitchHat": "Witch Hat"
+        "GothLife.WitchHat": "Witch Hat",
+        "GothLife.ProgrammerSocks": "Programmer Socks",
+        "GothLife.ProgrammerSocksWithShoes": "Programmer Socks With Sneakers"
     },
     "Food": {
         "GothLife.PBJ": "PB & Blackcurrant Jelly Sandwich",
-        "GothLife.BlackRice": "Black Rice"
+        "GothLife.BlackRice": "Black Rice",
+        "GothLife.DeviledEggs": "Deviled Eggs",
+        "GothLife.PumpkinSpiceLatte": "Pumpkin Spice Latte"
     },
     "Jobs": {
         "GothLife.Gravekeeper": "Gravekeeper",
@@ -35,5 +39,8 @@
         "GothLife.Mortician8": "Funeral Planner",
         "GothLife.Mortician9": "Funeral Home Director",
         "GothLife.MorticianDescription": "Even the dead need dressing up, and a mortician is just the one to do it."
+    },
+    "ChoicePrompts": {
+        
     }
 }
