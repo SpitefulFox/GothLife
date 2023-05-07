@@ -25,12 +25,12 @@ namespace GothLife {
         // visual data about this mod
         public override string Name => "Goth Life";
         public override string Description => "The darkness in your soul in mod form.";
-        public override TextureRegion Icon => this.uiTextures[0, 0];
+        public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
 
-        private UniformTextureAtlas uiTextures;
-        private UniformTextureAtlas gothTops;
-        private UniformTextureAtlas gothHats;
-        private UniformTextureAtlas gothShoes;
+        private Dictionary<Point, TextureRegion> uiTextures;
+        private Dictionary<Point, TextureRegion> gothTops;
+        private Dictionary<Point, TextureRegion> gothHats;
+        private Dictionary<Point, TextureRegion> gothShoes;
 
 
         public ColorScheme darknessScheme;
@@ -68,8 +68,8 @@ namespace GothLife {
             
             // adding custom clothing
             Clothes.Register(new Clothes("GothLife.SkullShirt", ClothesLayer.Shirt,
-                this.gothTops[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                100f, // the price
+                this.gothTops, new Point(0,0), // the top left in-world region (the rest will be auto-gathered from the atlas)
+                20f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Workout | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer , // the clothes item's use cases
                 darknessScheme, ColorScheme.White)
                 { 
@@ -77,7 +77,7 @@ namespace GothLife {
                 });
 
             Clothes.Register(new Clothes("GothLife.WitchHat", ClothesLayer.HeadAccessories,
-                this.gothHats[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
+                this.gothHats, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
                 100f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer | ClothesIntention.Winter, // the clothes item's use cases
                 darknessScheme, darknessScheme)
@@ -86,26 +86,26 @@ namespace GothLife {
             });
 
             Clothes.Register(new Clothes("GothLife.ProgrammerSocks", ClothesLayer.Shoes,
-                this.gothShoes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                100f, // the price
+                this.gothShoes, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
+                40f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Sleep, // the clothes item's use cases
                 ColorScheme.White, darkRainbow)
             {
                 Icon = this.Icon,
-                DepthFunction = (Person.Pose _, Direction2 _) => 0f
+                DepthFunction = ((Pose Pose, Direction2 Rotation, int Layer) _) => ClothesLayer.Pants.GetDepth() - 0.5f
             });
 
             Clothes.Register(new Clothes("GothLife.ProgrammerSocksWithShoes", ClothesLayer.Shoes,
-                this.gothShoes[0, 0], // the top left in-world region (the rest will be auto-gathered from the atlas)
-                100f, // the price
+                this.gothShoes, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
+                60f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Formal, // the clothes item's use cases
                 ColorScheme.White, darkRainbow, darknessScheme)
             {
                 Icon = this.Icon,
-                DepthFunction = (Person.Pose _, Direction2 _) => 0f
+                DepthFunction = ((Pose Pose, Direction2 Rotation, int Layer) _) => ClothesLayer.Pants.GetDepth() - 0.5f
             });
 
-            JobType.Register(new JobType("GothLife.Gravekeeper", uiTextures[2, 0], 18f, new MonoGame.Extended.Range<int>(0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday)
+            JobType.Register(new JobType("GothLife.Gravekeeper", uiTextures[new Point(2, 0)], 18f, (0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday)
             {
                 RequiredPromotionSkills = new (SkillType, float)[2]
                 {
@@ -113,7 +113,7 @@ namespace GothLife {
                     (SkillType.Repair, 0.5f)
                 }
             });
-            JobType.Register(new JobType("GothLife.Mortician", uiTextures[4, 0], 25f, new MonoGame.Extended.Range<int>(10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday)
+            JobType.Register(new JobType("GothLife.Mortician", uiTextures[new Point(4, 0)], 25f, (10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday)
             {
                 RequiredPromotionSkills = new (SkillType, float)[2]
                 {
@@ -135,10 +135,11 @@ namespace GothLife {
             // we submit it to the texture packer to increase rendering performance. The callback is invoked once packing is completed
             //texturePacker.Add(content.Load<Texture2D>("CustomClothes"), r => this.customClothes = new UniformTextureAtlas(r, 4, 6));
 
-            texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
-            texturePacker.Add(content.Load<Texture2D>("GothTops"), r => this.gothTops = new UniformTextureAtlas(r, 8, 8));
-            texturePacker.Add(content.Load<Texture2D>("GothHats"), r => this.gothHats = new UniformTextureAtlas(r, 8, 6));
-            texturePacker.Add(content.Load<Texture2D>("GothShoes"), r => this.gothShoes = new UniformTextureAtlas(r, 12, 6));
+            //texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
+            texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r);
+            texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothTops"), 8, 7), r => this.gothTops = r);
+            texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothHats"), 8, 5), r => this.gothHats = r);
+            texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothShoes"), 12, 6), r => this.gothShoes = r);
         }
 
         public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info)
