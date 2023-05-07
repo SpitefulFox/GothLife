@@ -137,7 +137,7 @@ namespace GothLife {
 
             //texturePacker.Add(content.Load<Texture2D>("UiTextures"), r => this.uiTextures = new UniformTextureAtlas(r, 8, 8));
             texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UiTextures"), 8, 8), r => this.uiTextures = r);
-            texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothTops"), 8, 7), r => this.gothTops = r);
+            texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothTops"), 8, 11), r => this.gothTops = r);
             texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothHats"), 8, 5), r => this.gothHats = r);
             texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothShoes"), 12, 6), r => this.gothShoes = r);
         }
