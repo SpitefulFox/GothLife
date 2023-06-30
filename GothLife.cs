@@ -15,6 +15,7 @@ using TinyLife.Tools;
 using TinyLife.World;
 using MLEM.Extensions;
 using MLEM.Misc;
+using static TinyLife.Skills.FoodType;
 
 namespace GothLife {
     public class GothLife : Mod {
@@ -26,6 +27,7 @@ namespace GothLife {
         public override string Name => "Goth Life";
         public override string Description => "The darkness in your soul in mod form.";
         public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
+        public override string IssueTrackerUrl => "https://github.com/SpitefulFox/GothLife/issues";
 
         private Dictionary<Point, TextureRegion> uiTextures;
         private Dictionary<Point, TextureRegion> gothTops;
@@ -71,7 +73,7 @@ namespace GothLife {
                 this.gothTops, new Point(0,0), // the top left in-world region (the rest will be auto-gathered from the atlas)
                 20f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Workout | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer , // the clothes item's use cases
-                darknessScheme, ColorScheme.White)
+                StylePreference.Neutral, darknessScheme, ColorScheme.White)
                 { 
                     Icon = this.Icon 
                 });
@@ -80,7 +82,7 @@ namespace GothLife {
                 this.gothHats, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
                 100f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Summer | ClothesIntention.Winter, // the clothes item's use cases
-                darknessScheme, darknessScheme)
+                StylePreference.Neutral, darknessScheme, darknessScheme)
             {
                 Icon = this.Icon
             });
@@ -89,7 +91,7 @@ namespace GothLife {
                 this.gothShoes, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
                 40f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Sleep, // the clothes item's use cases
-                ColorScheme.White, darkRainbow)
+                StylePreference.Feminine, ColorScheme.White, darkRainbow)
             {
                 Icon = this.Icon,
                 DepthFunction = ((Pose Pose, Direction2 Rotation, int Layer) _) => ClothesLayer.Pants.GetDepth() - 0.5f
@@ -99,7 +101,7 @@ namespace GothLife {
                 this.gothShoes, new Point(0, 0), // the top left in-world region (the rest will be auto-gathered from the atlas)
                 60f, // the price
                 ClothesIntention.Everyday | ClothesIntention.Work | ClothesIntention.Party | ClothesIntention.Formal, // the clothes item's use cases
-                ColorScheme.White, darkRainbow, darknessScheme)
+                StylePreference.Feminine, ColorScheme.White, darkRainbow, darknessScheme)
             {
                 Icon = this.Icon,
                 DepthFunction = ((Pose Pose, Direction2 Rotation, int Layer) _) => ClothesLayer.Pants.GetDepth() - 0.5f
@@ -122,10 +124,17 @@ namespace GothLife {
                 }
             });
 
-            FoodType.Register(new FoodType("GothLife.PBJ", 0, 5, 80, FoodType.FoodIntolerance.None));
-            FoodType.Register(new FoodType("GothLife.BlackRice", 1, 7, 90, FoodType.FoodIntolerance.None));
-            FoodType.Register(new FoodType("GothLife.DeviledEggs", 2, 8, 100, FoodType.FoodIntolerance.NotVegan));
-            FoodType.Register(new FoodType("GothLife.PumpkinSpiceLatte", 5, 15, 35, FoodType.FoodIntolerance.None, FoodType.IngredientSource.CoffeeMachine, ColorHelper.FromHexRgb(0xff7518)));
+            FoodType.Register(new FoodType("GothLife.PBJ", 0, 5, 0.5f, FoodType.FoodIntolerance.None));
+            FoodType.Register(new FoodType("GothLife.BlackRice", 1, 7, 0.75f, FoodType.FoodIntolerance.None));
+            FoodType.Register(new FoodType("GothLife.DeviledEggs", 2, 8, 1.5f, FoodType.FoodIntolerance.NotVegan));
+            FoodType.Register(new FoodType("GothLife.PumpkinSpiceLatte", 5, 18, 0.4f, FoodType.FoodIntolerance.NotForBabies, FoodType.IngredientSource.CoffeeMachine, ColorHelper.FromHexRgb(0xff7518)));
+            FoodType.Register(new FoodType("GothLife.LapsangSouchong", 0, 8, 0.3f, FoodIntolerance.NotForBabies, IngredientSource.TeaKit, ColorHelper.FromHexRgb(0x605b5a)));
+            //Is it blood? Is it a Bloody Mary with bacon in it? Who knoooows
+            FoodType.Register(new FoodType("GothLife.Countess", 5, 30, 1f, FoodType.FoodIntolerance.NotForChildren | FoodType.FoodIntolerance.NotPescetarian, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x750800)));
+            //Absinthe prepared classical style by pouring water through a sugar cube. Should probably be white like the actual drink once you pour it, but COLORS!
+            FoodType.Register(new FoodType("GothLife.GreenFairy", 3, 15, 0.15f, FoodType.FoodIntolerance.NotForChildren, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x7cff54)));
+            //Made up drink!
+            FoodType.Register(new FoodType("GothLife.Ferryman", 4, 15, 0.15f, FoodType.FoodIntolerance.NotForChildren, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x3dd3d1)));
         }
 
         public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {

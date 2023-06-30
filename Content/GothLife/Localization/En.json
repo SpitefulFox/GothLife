@@ -12,7 +12,11 @@
         "GothLife.PBJ": "PB & Blackcurrant Jelly Sandwich",
         "GothLife.BlackRice": "Black Rice",
         "GothLife.DeviledEggs": "Deviled Eggs",
-        "GothLife.PumpkinSpiceLatte": "Pumpkin Spice Latte"
+        "GothLife.PumpkinSpiceLatte": "Pumpkin Spice Latte",
+        "GothLife.LapsangSouchong": "Lapsang Souchong",
+        "GothLife.Countess": "Countess",
+        "GothLife.GreenFairy": "Green Fairy",
+        "GothLife.Ferryman": "Ferryman"
     },
     "Jobs": {
         "GothLife.Gravekeeper": "Gravekeeper",
