@@ -1,6 +1,7 @@
 {
     "BuildMode": {
-        "GothLife.Candle": "Gothic Candle"
+        "GothLife.Candle": "Gothic Candle",
+        "GothLife.Cauldron": "Cauldron"
     },
     "Clothes": {
         "GothLife.SkullShirt": "Skull Shirt",

@@ -1,18 +1,9 @@
 GothLife.CandleUp
 loc 32 0 32 32
 piv 48 16
-GothLife.CandleFlame0
+GothLife.CauldronUp
 loc 0 32 32 32
-piv 16 48
-GothLife.CandleFlame1
-loc 32 32 32 32
-piv 48 48
-GothLife.CandleFlame2
-loc 64 32 32 32
-piv 80 48
-GothLife.CandleFlame3
-loc 96 32 32 32
-piv 112 48
+piv 16 53
 FoodGothLife.BlackRice
 loc 0 0 16 16
 FoodGothLife.PBJ

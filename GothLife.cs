@@ -47,7 +47,6 @@ namespace GothLife {
             FurnitureType.Register(new FurnitureType.TypeSettings("GothLife.Candle", new Point(1, 1), ObjectCategory.SmallObject | ObjectCategory.FireLight, 15, darknessScheme, ColorScheme.White)
             {
                 Icon = this.Icon,
-                //ConstructedType = typeof(FurnitureCandle)
 
                 DecorativeRating = f => 1,
                 Tab = (FurnitureTool.Tab.Decoration | FurnitureTool.Tab.Lighting),
@@ -67,7 +66,19 @@ namespace GothLife {
                 }
             });
 
-            
+            FurnitureType.Register(new FurnitureType.TypeSettings("GothLife.Cauldron", new Point(1, 1), ObjectCategory.TeaKit | ObjectCategory.CoffeeMachine | ObjectCategory.BartendingObject, 500f, ColorScheme.White, darknessScheme, ColorScheme.SimpleWood)
+            {
+                Icon = this.Icon,
+                Reliability = 3,
+                BrokenBehavior = (BreakableFurniture.BrokenBehavior.Smoke),
+                Tab = (FurnitureTool.Tab.Kitchen),
+                ActionSpots = new ActionSpot[1]
+                {
+                    new ActionSpot(Vector2.Zero, (Direction2)1)
+                }
+            });
+
+
             // adding custom clothing
             Clothes.Register(new Clothes("GothLife.SkullShirt", ClothesLayer.Shirt,
                 this.gothTops, new Point(0,0), // the top left in-world region (the rest will be auto-gathered from the atlas)
@@ -111,7 +122,7 @@ namespace GothLife {
             {
                 RequiredPromotionSkills = new (SkillType, float)[2]
                 {
-                    (SkillType.Fitness, 1f),
+                    (SkillType.Cleaning, 1f),
                     (SkillType.Repair, 0.5f)
                 }
             });
