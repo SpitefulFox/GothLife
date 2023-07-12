@@ -33,6 +33,7 @@ namespace GothLife {
         private Dictionary<Point, TextureRegion> gothTops;
         private Dictionary<Point, TextureRegion> gothHats;
         private Dictionary<Point, TextureRegion> gothShoes;
+        private Dictionary<Point, TextureRegion> gothWallpaper;
 
 
         public ColorScheme darknessScheme;
@@ -77,6 +78,8 @@ namespace GothLife {
                     new ActionSpot(Vector2.Zero, (Direction2)1)
                 }
             });
+
+            Wallpaper.Register("GothLife.SkullWallpaper", 15, this.gothWallpaper, new Point(0, 0), new ColorScheme[2] { darknessScheme, ColorScheme.White }, this.Icon);
 
 
             // adding custom clothing
@@ -160,6 +163,7 @@ namespace GothLife {
             texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothTops"), 8, 11), r => this.gothTops = r);
             texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothHats"), 8, 5), r => this.gothHats = r);
             texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("GothShoes"), 12, 6), r => this.gothShoes = r);
+            WallMode.ApplyMasks(content.Load<Texture2D>("GothWallpaper"), 4, 5, texturePacker, r => this.gothWallpaper = r);
         }
 
         public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info)
