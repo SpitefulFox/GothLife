@@ -29,7 +29,7 @@ namespace GothLife {
         public override string Description => "The darkness in your soul in mod form.";
         public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
         public override string IssueTrackerUrl => "https://github.com/SpitefulFox/GothLife/issues";
-        public override string TestedVersionRange => "[0.49.0,0.49.2]";
+        public override string TestedVersionRange => "[0.50.0,0.50.1]";
 
         private Dictionary<Point, TextureRegion> uiTextures;
         private Dictionary<Point, TextureRegion> gothTops;
@@ -123,7 +123,7 @@ namespace GothLife {
                 DepthFunction = Clothes.BelowDepth(ClothesLayer.Pants, 0.5f)
             });*/
 
-            JobType.Register(new JobType("GothLife.Gravekeeper", uiTextures[new Point(2, 0)], 18f, (0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday)
+            JobType.Register(new JobType("GothLife.Gravekeeper", uiTextures[new Point(2, 0)], 18f, TinyLife.Actions.OutOfTownIntention.Other, (0, 8), System.DayOfWeek.Tuesday, System.DayOfWeek.Thursday)
             {
                 RequiredPromotionSkills = new (SkillType, float)[2]
                 {
@@ -131,11 +131,11 @@ namespace GothLife {
                     (SkillType.Repair, 0.5f)
                 }
             });
-            JobType.Register(new JobType("GothLife.Mortician", uiTextures[new Point(4, 0)], 25f, (10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday)
+            JobType.Register(new JobType("GothLife.Mortician", uiTextures[new Point(4, 0)], 25f, TinyLife.Actions.OutOfTownIntention.Hospital, (10, 18), System.DayOfWeek.Monday, System.DayOfWeek.Wednesday, System.DayOfWeek.Tuesday)
             {
                 RequiredPromotionSkills = new (SkillType, float)[2]
                 {
-                    (SkillType.Charisma, 0.25f),
+                    (SkillType.Cleaning, 0.25f),
                     (SkillType.Reasoning, 0.5f)
                 }
             });
@@ -145,18 +145,22 @@ namespace GothLife {
             {
                 AdditionalObject = ObjectCategory.Stove
             });
-            FoodType.Register(new FoodType("GothLife.DeviledEggs", 2, 8, 1.5f, FoodRestriction.NotVegan, FoodTime.Lunch | FoodTime.Dinner)
+            FoodType.Register(new FoodType("GothLife.DeviledEggs", 2, 8, 1.5f, FoodRestriction.NotForBabies | FoodRestriction.NotVegan, FoodTime.Lunch | FoodTime.Dinner)
             {
                 AdditionalObject = ObjectCategory.Stove
             });
-            FoodType.Register(new FoodType("GothLife.PumpkinSpiceLatte", 5, 18, 0.4f, FoodRestriction.NotForBabies, FoodTime.Breakfast, FoodType.IngredientSource.CoffeeMachine, ColorHelper.FromHexRgb(0xff7518)));
+            FoodType.Register(new FoodType("GothLife.PumpkinSpiceLatte", 5, 9, 0.4f, FoodRestriction.NotForBabies, FoodTime.Breakfast, FoodType.IngredientSource.CoffeeMachine, ColorHelper.FromHexRgb(0xff7518)));
+            FoodType.Register(new FoodType("GothLife.LavenderLatte", 5, 9, 0.4f, FoodRestriction.NotForBabies, FoodTime.Breakfast, FoodType.IngredientSource.CoffeeMachine, ColorHelper.FromHexRgb(0x967bb6)));
             FoodType.Register(new FoodType("GothLife.LapsangSouchong", 0, 8, 0.3f, FoodRestriction.NotForBabies, FoodTime.Breakfast, IngredientSource.TeaKit, ColorHelper.FromHexRgb(0x605b5a)));
+            FoodType.Register(new FoodType("GothLife.ThaiTea", 5, 15, 0.4f, FoodRestriction.NotForBabies, FoodTime.None, IngredientSource.TeaKit, ColorHelper.FromHexRgb(0xff8b4c)));
+            FoodType.Register(new FoodType("GothLife.ChrysanthemumTea", 0, 6, 0.25f, FoodRestriction.NotForBabies, FoodTime.None, IngredientSource.TeaKit, ColorHelper.FromHexRgb(0xfffa7c)));
+            FoodType.Register(new FoodType("GothLife.ButterflyPeaTea", 1, 8, 0.25f, FoodRestriction.NotForBabies, FoodTime.None, IngredientSource.TeaKit, ColorHelper.FromHexRgb(0x0026ff)));
             //Is it blood? Is it a Bloody Mary with bacon in it? Who knoooows
-            FoodType.Register(new FoodType("GothLife.Countess", 5, 30, 1f, FoodRestriction.NotForChildren | FoodRestriction.NotPescetarian, FoodTime.None, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x750800)));
+            FoodType.Register(new FoodType("GothLife.Countess", 5, 30, 1f, FoodRestriction.NotForBabies | FoodRestriction.NotForChildren | FoodRestriction.NotForPregnancy | FoodRestriction.NotPescetarian, FoodTime.None, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x750800)));
             //Absinthe prepared classical style by pouring water through a sugar cube. Should probably be white like the actual drink once you pour it, but COLORS!
-            FoodType.Register(new FoodType("GothLife.GreenFairy", 3, 15, 0.15f, FoodRestriction.NotForChildren, FoodTime.None, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x7cff54)));
+            FoodType.Register(new FoodType("GothLife.GreenFairy", 3, 15, 0.15f, FoodRestriction.NotForBabies | FoodRestriction.NotForChildren | FoodRestriction.NotForPregnancy, FoodTime.None, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x7cff54)));
             //Made up drink!
-            FoodType.Register(new FoodType("GothLife.Ferryman", 4, 15, 0.15f, FoodRestriction.NotForChildren, FoodTime.None, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x3dd3d1)));
+            FoodType.Register(new FoodType("GothLife.Ferryman", 4, 15, 0.15f, FoodRestriction.NotForBabies | FoodRestriction.NotForChildren | FoodRestriction.NotForPregnancy, FoodTime.None, FoodType.IngredientSource.MixologyKit, ColorHelper.FromHexRgb(0x3dd3d1)));
         }
 
         public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info) {

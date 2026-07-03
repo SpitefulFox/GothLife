@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
     <ItemGroup>
-		<PackageReference Include="TinyLife.ApiReference" Version="0.49.0">
+		<PackageReference Include="TinyLife.ApiReference" Version="0.50.0">
 			<ExcludeAssets>runtime</ExcludeAssets>
 		</PackageReference>
 
@@ -50,13 +50,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Content\GothLife\GothLifeFurniture.atlas" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include="Content\GothLife\CustomClothes.png" />
-      <Content Include="Content\GothLife\CustomFurniture.atlas" />
-      <Content Include="Content\GothLife\CustomFurniture.png" />
       <Content Include="Content\GothLife\GothLifeFurniture.atlas" />
       <Content Include="Content\GothLife\Localization\En.json" />
     </ItemGroup>
